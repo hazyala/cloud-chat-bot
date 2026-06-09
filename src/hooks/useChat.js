@@ -9,6 +9,25 @@ const INITIAL_MESSAGES = [
 ];
 const COMPOSER_TEXTAREA_MAX_HEIGHT = 208;
 
+async function readApiResponse(response) {
+  const text = await response.text();
+  if (!text.trim()) return {};
+
+  try {
+    return JSON.parse(text);
+  } catch {
+    return {};
+  }
+}
+
+function getFallbackErrorMessage(response) {
+  if (response.status === 404) {
+    return "404: 채팅 API 엔드포인트를 찾을 수 없습니다. 로컬 개발 서버의 /api/chat 연결을 확인해 주세요.";
+  }
+
+  return `${response.status}: 응답 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.`;
+}
+
 export function useChat(defaultModel) {
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [input, setInput] = useState("");
@@ -51,8 +70,10 @@ export function useChat(defaultModel) {
           messages: nextMessages.map(({ role, content }) => ({ role, content }))
         })
       });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error ?? "응답 처리 중 오류가 발생했습니다.");
+      const data = await readApiResponse(response);
+      if (!response.ok) {
+        throw new Error(data.error ?? getFallbackErrorMessage(response));
+      }
 
       setMessages((currentMessages) => [
         ...currentMessages,
