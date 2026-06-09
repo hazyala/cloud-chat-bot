@@ -1,8 +1,6 @@
-const ALLOWED_MODELS = new Set([
-  "gemini-3.5-flash",
-  "gemini-3.1-flash-lite",
-  "gemini-2.5-flash-lite"
-]);
+import { ALLOWED_GEMINI_MODEL_IDS, DEFAULT_GEMINI_MODEL } from "../shared/geminiModels.js";
+
+const ALLOWED_MODELS = new Set(ALLOWED_GEMINI_MODEL_IDS);
 
 const GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models";
 
@@ -33,7 +31,7 @@ export default async function handler(request, response) {
     return response.status(500).json({ error: "서버에 GEMINI_API_KEY가 설정되어 있지 않습니다." });
   }
 
-  const { model = process.env.GEMINI_DEFAULT_MODEL, messages } = request.body ?? {};
+  const { model = process.env.GEMINI_DEFAULT_MODEL ?? DEFAULT_GEMINI_MODEL, messages } = request.body ?? {};
   if (!ALLOWED_MODELS.has(model)) {
     return response.status(400).json({ error: "지원하지 않는 Gemini 모델입니다." });
   }

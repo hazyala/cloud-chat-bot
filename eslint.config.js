@@ -14,7 +14,7 @@ export default [
     }
   },
   {
-    files: ["src/**/*.{js,jsx}"],
+    files: ["src/**/*.{js,jsx}", "shared/**/*.js"],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
