@@ -1,0 +1,304 @@
+/* ========== Chat Page ========== */
+body {
+  /* 그라데이션 + 애니메이션 */
+  background: linear-gradient(135deg, #e0f7fa, #ffe0b2, #d1c4e9, #f8bbd0);
+  background-size: 400% 400%;
+  animation: prism 12s ease infinite;
+  overflow: hidden;
+  position: relative;
+}
+
+@keyframes prism {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  background: url("img/IMG_3087.JPG") no-repeat center center / cover;
+  opacity: 0.5;
+  z-index: -2;
+
+  transform: translate(-50%, -50%);
+  animation: cloudCircle 20s ease-in-out infinite;
+}
+
+@keyframes cloudCircle {
+  0%   { transform: translate(-50%, -50%) translate(0vw, 0vh); }
+  25%  { transform: translate(-50%, -50%) translate(8vw, 3vh); }
+  50%  { transform: translate(-50%, -50%) translate(0vw, 6vh); }
+  75%  { transform: translate(-50%, -50%) translate(-8vw, 3vh); }
+  100% { transform: translate(-50%, -50%) translate(0vw, 0vh); }
+}
+
+/* ========== Layout ========== */
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  color: white;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 1rem;
+  position: sticky;
+  top: 0;
+  background: none;
+  backdrop-filter: blur(20px);
+}
+
+.chat-title {
+  font-weight: 700;
+  letter-spacing: .2px;
+  margin-left: 40px;
+  font-size: 1.2rem;
+}
+
+.chat-meta {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-right: 40px;
+  font-size: 1rem;
+}
+
+#model-badge {
+  font-size: .85rem;
+  opacity: .8;
+  margin-right: 20px;
+}
+
+.chat-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+/* ========== Bubble ========== */
+.bubble {
+  max-width: min(720px, 85%);
+  display: flex;
+}
+
+.bubble.user {
+  align-self: flex-end;
+}
+
+.bubble.assistant {
+  align-self: flex-start;
+}
+
+.bubble-inner {
+  padding: .8rem .95rem;
+  line-height: 1.4;
+  border-radius: 16px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  box-shadow: 0 1px 0 rgba(0,0,0,.1), 0 8px 20px rgba(0,0,0,.25);
+}
+
+.bubble.user .bubble-inner {
+  background:rgba(236, 110, 173, 1);   
+  color: white;
+  border-bottom-right-radius: 6px;
+  backdrop-filter: blur(6px);            
+  border: 1px solid rgba(255,255,255,0.1); 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);  
+  backdrop-filter: blur(10px);           
+  -webkit-backdrop-filter: blur(10px);   
+  margin-right: 40px;
+
+}
+
+.bubble.assistant .bubble-inner {
+  background: rgba(52, 148, 230, 1);
+  color: white;
+  border-bottom-left-radius: 6px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  backdrop-filter: blur(10px);          
+  -webkit-backdrop-filter: blur(10px);  
+  margin-left: 40px;
+
+}
+
+
+.bubble.assistant.thinking .bubble-inner {
+  opacity: .75;
+  font-style: italic;
+}
+
+/* ========== Composer (입력창 + 버튼) ========== */
+.composer {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+
+  width: 80vw;
+  max-width: 900px;
+  margin: 0 auto 50px auto;    
+  padding: 0px 50px;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: -20px;
+  
+}
+
+#message {
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+
+  color: rgb(97, 97, 97);
+  border-radius: 999px;
+  background: rgba(0,0,0,0.05);
+  backdrop-filter: blur(8px);
+
+  padding: 12px 20px;
+
+  margin-left: clamp(0.1px, 0.1%, 0.1px);
+  margin-right: clamp(10px, 15%, 30px);
+}
+
+#message:focus {
+  border: none;
+  box-shadow: none;
+}
+
+#send-btn {
+  flex-shrink: 0;
+  border: none;
+  border-radius: 25px;           
+  width: clamp(90px, 20%, 180px);
+  padding: 20px 15px;
+
+  font-size: 1.5rem;
+  font-weight: 1000;
+  cursor: pointer;
+
+  background-image: linear-gradient(to left,#EC6EAD 0%, #3494E6 51%, #EC6EAD 100%);
+  background-size: 200% auto;
+  color: #fff;
+  transition: 0.5s;
+
+  box-shadow:
+    inset 1px 1px 3px rgba(255, 255, 255, 0.6),
+    inset -1px -1px 3px rgba(0, 0, 0, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+#send-btn:hover {
+  background-position: right center;
+}
+
+#send-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* ========== Ghost Button (RESET 등) ========== */
+button.ghost {
+  background: transparent;
+  color: white;
+  border-color: white;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: .4rem .8rem;
+}
+
+button.ghost:hover {
+  transform: scale(1.08);
+}
+
+/* ========== Glass Container ========== */
+.container {
+  display: flex;
+  justify-content: center;   
+  align-items: center;      
+  gap: 12px;
+
+  position: relative;
+  z-index: 5;
+
+  
+  max-width: 2800px;         
+  margin: 0 auto 50px auto;  
+}
+
+.glass-container {
+  position: relative;
+  display: flex;
+  color: var(--lg-text);
+  cursor: pointer;
+  background: transparent;
+  border-radius: 3rem;     
+  overflow: hidden;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2),
+              0 0 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+}
+
+.glass-container--large {
+  min-width: 80rem;          
+}
+
+/* ========== Glass Layers ========== */
+.glass-filter {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  backdrop-filter: blur(0px);
+  filter: url(#lg-dist);
+  isolation: isolate;
+}
+
+.glass-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--lg-bg-color);
+}
+
+.glass-specular {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  overflow: hidden;
+  box-shadow: inset 1px 1px 0 var(--lg-highlight),
+              inset 0 0 5px var(--lg-highlight);
+}
+
+.glass-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;            
+  padding: 0.4rem 1rem;    
+}
+
+.glass-content--inline {
+  padding: 0.3rem 1.5rem 0.3rem 0.75rem;
+  flex: 1 1 auto;
+  justify-content: space-between;
+}
