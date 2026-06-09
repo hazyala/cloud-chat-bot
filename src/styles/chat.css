@@ -116,21 +116,22 @@ button.ghost:hover {
 .chat-composer-stage {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   gap: 12px;
   position: fixed;
   left: 50%;
   bottom: clamp(18px, 5vh, 50px);
   z-index: 20;
-  width: min(80vw, 900px);
+  width: min(92vw, 1400px);
   margin: 0;
   transform: translateX(-50%);
 }
 
 .chat-glass {
   width: 100%;
-  min-height: clamp(64px, 10vw, 90px);
-  border-radius: 3rem;
+  min-height: 76px;
+  border-radius: 42px;
+  overflow: visible;
 }
 
 .composer {
@@ -138,27 +139,33 @@ button.ghost:hover {
   z-index: 5;
   display: flex;
   align-items: center;
+  gap: clamp(10px, 2vw, 24px);
   width: 100%;
-  padding: 14px clamp(18px, 5vw, 50px);
+  padding: 14px clamp(16px, 4vw, 38px);
 }
 
 #message {
   flex: 1;
+  min-width: 0;
   resize: none;
-  min-height: 48px;
-  max-height: 180px;
+  min-height: 70px;
+  max-height: 208px;
   overflow-y: auto;
+  overflow-x: hidden;
   border: none;
   outline: none;
   font-size: 1.2rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: rgb(97, 97, 97);
-  border-radius: 999px;
+  border-radius: 24px;
   background: rgba(0, 0, 0, 0.05);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  padding: 10px 20px;
-  margin-right: clamp(10px, 15%, 30px);
+  padding: 22px 38px 22px 20px;
+  margin-right: 0;
+  scrollbar-gutter: stable both-edges;
+  background-clip: padding-box;
+  clip-path: inset(0 round 24px);
 }
 
 #message:focus {
@@ -168,21 +175,11 @@ button.ghost:hover {
 
 #send-btn {
   flex-shrink: 0;
-  border: none;
-  border-radius: 25px;
   width: clamp(90px, 20%, 180px);
-  padding: 20px 15px;
-  font-size: 1.5rem;
-  font-weight: 1000;
-  cursor: pointer;
-  background-image: linear-gradient(to left, #ec6ead 0%, #3494e6 51%, #ec6ead 100%);
-  background-size: 200% auto;
-  color: #fff;
-  transition: 0.5s;
-  box-shadow:
-    inset 1px 1px 3px rgba(255, 255, 255, 0.6),
-    inset -1px -1px 3px rgba(0, 0, 0, 0.15),
-    0 4px 12px rgba(0, 0, 0, 0.25);
+  height: 70px;
+  min-height: 70px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 #send-btn:hover {
@@ -230,25 +227,49 @@ button.ghost:hover {
   }
 
   .chat-glass {
-    min-height: 82px;
-    border-radius: 42px;
+    min-height: 70px;
+    border-radius: 34px;
   }
 
   .composer {
     width: 100%;
+    gap: 10px;
     padding: 12px;
   }
 
   #message {
-    margin-right: 10px;
     font-size: 1rem;
-    min-height: 46px;
-    padding: 10px 16px;
+    min-height: 70px;
+    max-height: 160px;
+    border-radius: 22px;
+    padding: 24px 32px 24px 16px;
+    clip-path: inset(0 round 22px);
   }
 
   #send-btn {
     width: 86px;
-    padding: 15px 10px;
+    height: 70px;
+    min-height: 70px;
+    padding: 0 10px;
     font-size: 1rem;
   }
+}
+
+#message::-webkit-scrollbar {
+  width: 10px;
+}
+
+#message::-webkit-scrollbar-track {
+  margin-block: 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+#message::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.3)),
+    rgba(236, 110, 173, 0.38);
 }

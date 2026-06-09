@@ -7,6 +7,7 @@ const INITIAL_MESSAGES = [
     content: "CloudChatBot is ready. Ask anything."
   }
 ];
+const COMPOSER_TEXTAREA_MAX_HEIGHT = 208;
 
 export function useChat(defaultModel) {
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
@@ -21,7 +22,7 @@ export function useChat(defaultModel) {
     if (!textarea) return;
 
     textarea.style.height = "auto";
-    textarea.style.height = `${Math.min(textarea.scrollHeight, 180)}px`;
+    textarea.style.height = `${Math.min(textarea.scrollHeight, COMPOSER_TEXTAREA_MAX_HEIGHT)}px`;
   }, [input]);
 
   async function sendMessage(event) {

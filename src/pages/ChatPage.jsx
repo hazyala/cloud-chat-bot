@@ -24,7 +24,7 @@ export function ChatPage({ selectedModel, onBackHome }) {
       <header className="chat-header">
         <div className="chat-title">Ask anything</div>
         <div className="chat-meta">
-          <span id="model-badge">model: {activeModel?.name ?? selectedModel}</span>
+          <span id="model-badge">model : {activeModel?.name ?? selectedModel}</span>
           <button className="ghost" onClick={resetChat} type="button">
             RESET
           </button>
@@ -69,7 +69,7 @@ export function ChatPage({ selectedModel, onBackHome }) {
               }}
             />
             <button type="submit" id="send-btn" disabled={!input.trim() || isLoading}>
-              SEND
+              Send
             </button>
           </form>
         </div>
