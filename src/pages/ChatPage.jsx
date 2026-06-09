@@ -40,7 +40,14 @@ export function ChatPage({ selectedModel, onBackHome }) {
         ))}
         {isLoading ? (
           <div className="bubble assistant thinking">
-            <div className="bubble-inner">Thinking...</div>
+            <div className="bubble-inner">
+              <span>Thinking</span>
+              <span className="thinking-dots" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </span>
+            </div>
           </div>
         ) : null}
         {error ? (
