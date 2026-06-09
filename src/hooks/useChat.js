@@ -4,7 +4,7 @@ const INITIAL_MESSAGES = [
   {
     id: crypto.randomUUID(),
     role: "assistant",
-    content: "안녕하세요. Cloud Chatbot입니다. 학습, 일정, 프로젝트 아이디어를 함께 정리해볼까요?"
+    content: "CloudChatBot is ready. Ask anything."
   }
 ];
 
