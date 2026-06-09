@@ -23,7 +23,10 @@ export function HomePage({ selectedModel, onSelectModel, onStartChat }) {
           <GlassLayers />
 
           <button id="startBtn" onClick={handleStartClick} type="button" aria-hidden={isModelPickerOpen}>
-            <span className="main-text">GET STARTED</span>
+            <span className="main-text">
+              <span>GET</span>
+              <span>STARTED</span>
+            </span>
             <br />
             <span className="sub-text">CloudChatBot</span>
           </button>
@@ -32,7 +35,6 @@ export function HomePage({ selectedModel, onSelectModel, onStartChat }) {
             <ModelSelect models={GEMINI_MODELS} selectedModel={selectedModel} onSelectModel={onSelectModel} />
             <div className="model-summary">
               <span>CloudChatBot</span>
-              <strong>Gemini model ready</strong>
             </div>
             <button id="enterBtn" onClick={onStartChat} type="button">
               Start
