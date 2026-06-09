@@ -31,7 +31,6 @@ function getFallbackErrorMessage(response) {
 export function useChat(defaultModel) {
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [input, setInput] = useState("");
-  const [selectedModel, setSelectedModel] = useState(defaultModel);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const inputRef = useRef(null);
@@ -66,7 +65,7 @@ export function useChat(defaultModel) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: selectedModel,
+          model: defaultModel,
           messages: nextMessages.map(({ role, content }) => ({ role, content }))
         })
       });
@@ -104,10 +103,8 @@ export function useChat(defaultModel) {
     inputRef,
     isLoading,
     messages,
-    selectedModel,
     resetChat,
     sendMessage,
-    setInput,
-    setSelectedModel
+    setInput
   };
 }
