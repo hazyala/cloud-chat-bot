@@ -1,0 +1,205 @@
+:root {
+  --lg-bg-color: rgba(255, 255, 255, 0.08);
+  --lg-highlight: rgba(255, 255, 255, 0.2);
+  --lg-text: #ffffff;
+  --pink: #ff4faf;
+  --blue: #216ed3;
+  color: #ffffff;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+button,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.55) rgba(255, 255, 255, 0.12);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.22)),
+    rgba(236, 110, 173, 0.42);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.55),
+    0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.34)),
+    rgba(52, 148, 230, 0.5);
+}
+
+.home-page,
+.chat-page {
+  min-height: 100svh;
+  background: linear-gradient(135deg, #e0f7fa, #ffe0b2, #d1c4e9, #f8bbd0);
+  background-size: 400% 400%;
+  animation: prism 12s ease infinite;
+  overflow: hidden;
+  position: relative;
+}
+
+.home-page::before,
+.chat-page::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  background: url("/img/IMG_3087.JPG") no-repeat center center / cover;
+  opacity: 0.5;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  animation: cloudCircle 20s ease-in-out infinite;
+}
+
+.home-page > *,
+.chat-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hidden {
+  display: none;
+}
+
+.liquid-filter {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+@keyframes prism {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes cloudCircle {
+  0% {
+    transform: translate(-50%, -50%) translate(0vw, 0vh);
+  }
+  25% {
+    transform: translate(-50%, -50%) translate(8vw, 3vh);
+  }
+  50% {
+    transform: translate(-50%, -50%) translate(0vw, 6vh);
+  }
+  75% {
+    transform: translate(-50%, -50%) translate(-8vw, 3vh);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(0vw, 0vh);
+  }
+}
+
+.glass-container {
+  position: relative;
+  display: flex;
+  color: var(--lg-text);
+  background: transparent;
+  border-radius: 2rem;
+  overflow: visible;
+  box-shadow:
+    0 12px 18px rgba(0, 0, 0, 0.18),
+    0 3px 5px rgba(0, 0, 0, 0.12);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+}
+
+.glass-clip {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.glass-filter {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  -webkit-backdrop-filter: blur(0);
+  backdrop-filter: blur(0);
+  filter: url("#lg-dist");
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+.glass-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: var(--lg-bg-color);
+}
+
+.glass-specular {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  overflow: hidden;
+  box-shadow: inset 0 0 6px var(--lg-highlight);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-overlay {
+    background: rgba(255, 255, 255, 0.34);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
