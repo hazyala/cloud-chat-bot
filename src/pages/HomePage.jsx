@@ -23,19 +23,14 @@ export function HomePage({ selectedModel, onSelectModel, onStartChat }) {
           <GlassLayers />
 
           <button id="startBtn" onClick={handleStartClick} type="button" aria-hidden={isModelPickerOpen}>
-            <span className="main-text">
-              <span>GET</span>
-              <span>STARTED</span>
-            </span>
+            <span className="main-text">GET STARTED</span>
             <br />
-            <span className="sub-text">CloudChatBot</span>
+            <span className="sub-text">made by 'hazyala'</span>
           </button>
 
           <div id="inputContent" className={`input-card ${isModelPickerOpen ? "" : "hidden"}`}>
             <ModelSelect models={GEMINI_MODELS} selectedModel={selectedModel} onSelectModel={onSelectModel} />
-            <div className="model-summary">
-              <span>CloudChatBot</span>
-            </div>
+            <div className="api-key-space" aria-hidden="true" />
             <button id="enterBtn" onClick={onStartChat} type="button">
               Start
             </button>

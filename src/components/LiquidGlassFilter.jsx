@@ -1,7 +1,16 @@
 export function LiquidGlassFilter() {
   return (
-    <svg className="liquid-filter" aria-hidden="true">
-      <filter id="lg-dist" x="0%" y="0%" width="100%" height="100%">
+    <svg className="liquid-filter" width="0" height="0" focusable="false" aria-hidden="true">
+      <filter
+        id="lg-dist"
+        x="0%"
+        y="0%"
+        width="100%"
+        height="100%"
+        filterUnits="objectBoundingBox"
+        primitiveUnits="userSpaceOnUse"
+        colorInterpolationFilters="sRGB"
+      >
         <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise" />
         <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
         <feDisplacementMap in="SourceGraphic" in2="blurred" scale="70" xChannelSelector="R" yChannelSelector="G" />
