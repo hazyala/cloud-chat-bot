@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 export function ModelSelect({ id = "model", models, selectedModel, onSelectModel }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,9 +20,7 @@ export function ModelSelect({ id = "model", models, selectedModel, onSelectModel
         onClick={() => setIsOpen((current) => !current)}
       >
         <span>{activeModel.name}</span>
-        <span className="model-toggle-arrow" aria-hidden="true">
-          v
-        </span>
+        <ChevronDown className="model-toggle-arrow" aria-hidden="true" strokeWidth={2.4} />
       </button>
 
       {isOpen ? (

@@ -30,7 +30,6 @@ export function HomePage({ selectedModel, onSelectModel, onStartChat }) {
 
           <div id="inputContent" className={`input-card ${isModelPickerOpen ? "" : "hidden"}`}>
             <ModelSelect models={GEMINI_MODELS} selectedModel={selectedModel} onSelectModel={onSelectModel} />
-            <div className="api-key-space" aria-hidden="true" />
             <button id="enterBtn" onClick={onStartChat} type="button">
               Start
             </button>
