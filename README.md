@@ -1,5 +1,7 @@
 # Cloud Chat Bot
 
+[웹 데모](https://cloud-chat-bot.vercel.app/)
+
 Gemini 모델을 선택해 대화하는 React 챗봇. 같은 채팅 핸들러를 로컬 Vite 서버와 Vercel 함수에서 사용한다.
 
 ## 대화가 처리되는 방식
